@@ -1,0 +1,77 @@
+import stanford.karel.*;
+public class CleanFlowerBed extends SuperKarel{
+	public void Up()
+	{
+		while (!facingNorth())
+		{
+			turnLeft();
+		}
+		move();
+	}
+	public void Down()
+	{
+		while (!facingSouth())
+		{
+			turnLeft();
+		}
+		move();
+	}
+	public void Lft()
+	{
+		while (!facingWest())
+		{
+			turnLeft();
+		}
+		move();
+	}
+	public void Rt()
+	{
+		while (!facingEast())
+		{
+			turnLeft();
+		}
+		move();
+	}
+	public void Clr()
+	{
+		while (beepersPresent())
+		{
+			pickBeeper();
+		}
+		putBeeper();
+		Down();Down();
+		while (beepersPresent())
+		{
+			pickBeeper();
+		}
+		putBeeper();
+		Up();Up();
+		
+	}
+	public void run()
+	{
+		while (true)
+		{
+			while (!facingEast())
+			{
+				turnLeft();
+			}
+			if (frontIsClear())
+			{
+				move();
+				while (beepersPresent())
+				{
+					pickBeeper();
+				}
+				Up();
+				if(!frontIsClear())
+				{
+					Clr();
+				}
+				Down();
+			}
+			else{break;}
+		}
+	}
+
+}
