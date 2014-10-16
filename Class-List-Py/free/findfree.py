@@ -19,8 +19,7 @@ print Lis
 for tab in names:
 	L = data.sheet_by_name(tab)
 	All.append (tab)
-	for x in range(1,13):
-		
+	for x in range(1,13):		
 		for y in range(1,8):
 			try:
 				val = L.cell(x,y).value

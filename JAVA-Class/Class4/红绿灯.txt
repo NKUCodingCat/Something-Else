@@ -1,0 +1,78 @@
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.Color;
+
+import acm.graphics.*;
+import acm.program.*;
+public class RYG extends GraphicsProgram{
+	public void run(){
+		GRect Beeper=new GRect(40,0,100,100);
+		Beeper.setFilled(true);
+		Beeper.setFillColor(Color.gray);
+		add(Beeper);
+		GRect Beeper2=new GRect(40,120,100,100);
+		Beeper2.setFilled(true);
+		Beeper2.setFillColor(Color.gray);
+		add(Beeper2);
+		GRect Beeper3=new GRect(40,240,100,100);
+		Beeper3.setFilled(true);
+		Beeper3.setFillColor(Color.gray);
+		add(Beeper3);
+		GOval RED=new GOval(50,10,80,80);
+		RED.setFilled(true);
+		RED.setFillColor(Color.red);
+		add(RED);
+		GOval GRE=new GOval(50,250,80,80);
+		GRE.setFilled(true);
+		GRE.setFillColor(Color.gray);
+		add(GRE);
+		GOval YEL=new GOval(50,130,80,80);
+		YEL.setFilled(true);
+		YEL.setFillColor(Color.gray);
+		add(YEL);
+		
+		while (true)
+		{
+		
+			GRE.setFillColor(Color.gray);
+			add(GRE);
+			RED.setFillColor(Color.red);
+			add(RED);
+		
+			Thread thread = Thread.currentThread();
+			try {
+				thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			RED.setFillColor(Color.gray);
+			add(RED);
+			YEL.setFillColor(Color.yellow);
+			add(YEL);
+		
+			try {
+				thread.sleep(2000);
+			} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			YEL.setFillColor(Color.gray);
+			add(YEL);
+			GRE.setFillColor(Color.green);
+			add(GRE);
+		
+			try {
+				thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+}

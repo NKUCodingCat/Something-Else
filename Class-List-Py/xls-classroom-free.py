@@ -1,12 +1,14 @@
 #=*=coding=utf-8-*-
 
-#L[1] 课程名称 L[6]周次 L[7]时间 L[9]位置
+#L[1] 课程名称 L[6]周次 L[7]时间 L[8]起止 L[9]位置
 
 import xlrd,xlwt,os
 import re
 
 Dict = {}
 
+style = xlwt.easyxf(u"align: wrap on, vert centre, horiz centre;")
+style.font.Size = 100
 
 ZL2 = re.compile(r"二主楼")
 ZL= re.compile(r"主楼")
@@ -27,7 +29,7 @@ for i in range(nrows ):
 		pos = "2ZL"+(M[-4:])
 		
 	elif ZL.findall(M):
-		pos = "ZL"+(M[-3:])
+		pos = "ZL"+(M[4:])
 		
 	else:
 		pos = ""
@@ -41,7 +43,7 @@ for i in range(nrows ):
 	
 
 	#pos = L[9]
-	val = (L[1],L[6],L[7])
+	val = [L[1],L[6],L[7],L[8]]
 	
 	if  not pos:
 		continue
@@ -65,6 +67,12 @@ print(len(Dict.keys()))
 for  i  in Dict.keys():
 
 	sheet = wbk.add_sheet(i.decode("utf-8","ignore"))
+	
+	for T in range(1,8):
+		sheet.col(T).width = 6250
+	
+	Lis = []
+	
 	for j in Dict[i]:
 		L = re.split("[\\/]",j[2])
 		for k in range(len(L)):
@@ -76,16 +84,63 @@ for  i  in Dict.keys():
 			except:
 				#print L[k]
 				L[k] = trans[a.lower()]
+		j [2] = L
+		j [1] = int(j[1])
+		
+		for cla in j[2]:
+			Lis.append([j[0],j[1],cla,j[3]])
+	
+	count = len(Lis)
+	for a in range( len(Lis)):
+		for b in range( len(Lis)-1 , a , -1):
+			src = Lis[a]
+			res = Lis[b]
+			if  src[1] == res[1] and src[2]==res[2]:
+			
+				if src[0][-1] ==  "]":
+					src[0] = src[0]+res[0]+"["+res[3]+"]"
+				else:
+					src[0] = src[0]+"["+src[3]+"]"+res[0]+"["+res[3]+"]"
+				Lis[a] = src
+				del(Lis[b])
+		
+			
+			
+	Dict[i] = Lis[:]	
+	for m in Dict[i]:
+		
+		sheet.write(  m[2] , m[1],m[0],style)
+
+		ERRLIST.append(i)
+	
+	
+	
+	#print Lis
+	#raw_input("PAUSE")
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+'''
 		for m in L:
 			try:
-				sheet.write(  m,int(j[1]) , j[0] )
+				sheet.write(  m,j[1] , j[0] )
 			except:
-				
 				ERRLIST.append(i)
+		print j
+		raw_input("PAUSE")
+'''
 	
 wbk.save(path+"\\free\\res.xls")
 ERR = list(set(ERRLIST))
 print(len(ERR))
 f = open(path+"\\free\\ERR2.txt","w")
 for i in ERR:
-	f.writelines(i.encode("utf-8")+'\n')
+	f.writelines(i+'\n')

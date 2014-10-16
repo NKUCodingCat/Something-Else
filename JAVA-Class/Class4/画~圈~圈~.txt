@@ -1,0 +1,30 @@
+import acm.program.*;
+import acm.util.*;
+import java.awt.Color;
+import acm.graphics.*;
+import acm.program.*;
+public class Cir extends GraphicsProgram{
+	private RandomGenerator rgen= RandomGenerator.getInstance();
+	public void run()
+	{
+			
+		for (int i = 0;i<2000;i++)
+		{
+			rgen.setSeed(System.currentTimeMillis());
+			Thread thread = Thread.currentThread();
+			try {
+				thread.sleep(rgen.nextInt(0,50));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int x = rgen.nextInt(0,500);
+			int y = rgen.nextInt(0,500);
+			int r = rgen.nextInt(0,50);
+			GOval oval=new GOval(x,y,r,r);
+			oval.setFilled(true);
+			oval.setFillColor(new Color(rgen.nextInt(0,256),rgen.nextInt(0,256),rgen.nextInt(0,256)));
+			add(oval);
+		}
+	}
+}
