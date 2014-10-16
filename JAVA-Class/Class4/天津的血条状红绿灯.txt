@@ -1,0 +1,71 @@
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.Color;
+
+import acm.graphics.*;
+import acm.program.*;
+public class TJRYG extends GraphicsProgram{
+	public void sleep(int time)
+	{
+		Thread thread = Thread.currentThread();
+		try {
+			thread.sleep(time);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void run(){
+		GRect Beeper=new GRect(100,40,70,150);
+		Beeper.setFilled(true);
+		Beeper.setFillColor(Color.gray);
+		add(Beeper);
+		GRect Beeper2=new GRect(110,190,50,200);
+		Beeper2.setFilled(true);
+		Beeper2.setFillColor(Color.black);
+		add(Beeper2);
+		GRect Beeper3=new GRect(120,190,30,200);
+		Beeper3.setFilled(true);
+		Beeper3.setFillColor(Color.white);
+		add(Beeper3);
+		GRect Light=new GRect(110,65,50,100);
+		Light.setFilled(true);
+		Light.setFillColor(Color.green);
+		add(Light);
+		while (true)
+		{
+			sleep(1000);
+			Light.setSize(50, 80);add(Light);
+			sleep(1000);
+			Light.setSize(50, 60);add(Light);
+			sleep(1000);
+			Light.setSize(50, 40);add(Light);
+			sleep(1000);
+			Light.setSize(50, 100);
+			for(int i = 0 ; i < 6;i ++)
+			{
+				Light.setFillColor(Color.yellow);
+				add(Light);sleep(250);
+				Light.setFillColor(Color.gray);
+				add(Light);sleep(250);
+			}
+			Light.setFillColor(Color.red);
+			add(Light);
+			sleep(2000);
+			Light.setSize(50, 80);add(Light);
+			sleep(1000);
+			Light.setSize(50, 60);add(Light);
+			sleep(1000);
+			Light.setSize(50, 40);add(Light);
+			sleep(1000);
+			Light.setSize(50, 100);
+			Light.setFillColor(Color.green);
+			add(Light);
+			sleep(2000);
+		
+	
+		}
+	}
+
+}
