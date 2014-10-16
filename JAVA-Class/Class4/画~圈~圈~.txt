@@ -13,7 +13,7 @@ public class Cir extends GraphicsProgram{
 			rgen.setSeed(System.currentTimeMillis());
 			Thread thread = Thread.currentThread();
 			try {
-				thread.sleep(rgen.nextInt(0,50));
+				thread.sleep(rgen.nextInt(0,100));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -23,7 +23,7 @@ public class Cir extends GraphicsProgram{
 			int r = rgen.nextInt(0,50);
 			GOval oval=new GOval(x,y,r,r);
 			oval.setFilled(true);
-			oval.setFillColor(new Color(rgen.nextInt(0,256),rgen.nextInt(0,256),rgen.nextInt(0,256)));
+			oval.setFillColor(new Color(rgen.nextInt(0,255),rgen.nextInt(0,255),rgen.nextInt(0,255)));
 			add(oval);
 		}
 	}
