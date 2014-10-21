@@ -29,41 +29,43 @@ public class TJRYG extends GraphicsProgram{
 		Beeper3.setFilled(true);
 		Beeper3.setFillColor(Color.white);
 		add(Beeper3);
-		GRect Light=new GRect(110,65,50,100);
+		GRect Light=new GRect(110,50,50,130);
 		Light.setFilled(true);
 		Light.setFillColor(Color.green);
 		add(Light);
+		double ax = Light.getWidth();
+		double ay = Light.getHeight();
 		while (true)
 		{
-			sleep(1000);
-			Light.setSize(50, 80);add(Light);
-			sleep(1000);
-			Light.setSize(50, 60);add(Light);
-			sleep(1000);
-			Light.setSize(50, 40);add(Light);
-			sleep(1000);
-			Light.setSize(50, 100);
-			for(int i = 0 ; i < 6;i ++)
+			
+			double bx = ax,by = ay;
+			Light.setSize(bx, by);
+			Light.setFillColor(Color.green);
+			while (by >= ay/6.0)
+			{
+				sleep(1000);
+				by -= ay/6.1;
+				Light.setSize(bx, by);
+				
+			}
+			by = ay;
+			Light.setSize(bx, by);
+			for(int i = 0 ; i < 3;i ++)
 			{
 				Light.setFillColor(Color.yellow);
-				add(Light);sleep(250);
+				sleep(500);
 				Light.setFillColor(Color.gray);
-				add(Light);sleep(250);
+				sleep(500);
 			}
 			Light.setFillColor(Color.red);
-			add(Light);
-			sleep(2000);
-			Light.setSize(50, 80);add(Light);
-			sleep(1000);
-			Light.setSize(50, 60);add(Light);
-			sleep(1000);
-			Light.setSize(50, 40);add(Light);
-			sleep(1000);
-			Light.setSize(50, 100);
-			Light.setFillColor(Color.green);
-			add(Light);
-			sleep(2000);
-		
+			while (by >= ay/6.0)
+			{
+				sleep(1000);
+				by -= ay/6.1;
+				Light.setSize(bx, by);
+				
+			}
+			by = ay;
 	
 		}
 	}
