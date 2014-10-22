@@ -7,7 +7,7 @@ public class Cir extends GraphicsProgram{
 	private RandomGenerator rgen= RandomGenerator.getInstance();
 	public void run()
 	{
-			
+		this.setSize(600,600);
 		for (int i = 0;i<2000;i++)
 		{
 			rgen.setSeed(System.currentTimeMillis());
