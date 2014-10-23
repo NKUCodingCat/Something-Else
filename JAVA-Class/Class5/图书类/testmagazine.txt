@@ -1,0 +1,13 @@
+import acm.program.*;
+
+public class TestMagazine extends ConsoleProgram{
+	public void run()
+	{
+		
+		magazine mag = new magazine();
+		print (mag.getClass());
+		print (mag.GetName());
+		print (mag.GetPost());
+		print (mag.GetNum());
+	}
+}

@@ -1,13 +1,13 @@
 
 public class book {
-	private int Num;
-	private String Name;
-	public boolean ChangeNum(int New){this.Num = New;return true;}
-	public boolean ChangeName(String New){this.Name =New;return true;}
+	private static int Num;
+	private static String Name;
+	public boolean ChangeNum(int New){book.Num = New;return true;}
+	public boolean ChangeName(String New){book.Name =New;return true;}
 	public int GetNum(){return Num;}
 	public String GetName(){return Name;}
-	public book(int Num,String str){this.Num = Num;this.Name =str;} 
-	public book(String str,int Num){this.Num = Num;this.Name =str;} 
-	public book(){this.Num = 0;this.Name ="Default";}
+	public book(int Num,String str){book.Num = Num;book.Name =str;} 
+	public book(String str,int Num){book.Num = Num;book.Name =str;} 
+	public book(){book.Num = 0;book.Name ="Default";}
 	
 }

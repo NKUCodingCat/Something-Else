@@ -1,11 +1,12 @@
-import acm.program.*;
+
 public class magazine extends book{
-	private int Post;
-	public magazine(int Post,int Num,String str){super(Num,str);this.Post = Post;}
-	public int GetNum(){return GetNum();}
-	public String GetName(){return GetName();}
+	private static int Post;
+	public magazine(int Post,int Num,String str){super(Num,str);magazine.Post = Post;}
+	public magazine(){super();magazine.Post=1;}
+	public int GetNum(){return super.GetNum();}
+	public String GetName(){return super.GetName();}
 	public int GetPost(){return Post;}
-	public boolean ChangeNum(int New){return ChangeNum(New);}
-	public boolean ChangeName(String New){return ChangeName( New);}
-	public boolean ChangePost(int New){this.Post=New;return true;}
+	public boolean ChangeNum(int New){return super.ChangeNum(New);}
+	public boolean ChangeName(String New){return super.ChangeName( New);}
+	public boolean ChangePost(int New){magazine.Post=New;return true;}
 }
