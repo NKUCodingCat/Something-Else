@@ -1,0 +1,38 @@
+import acm.program.*;
+import acm.util.*;
+
+import java.awt.Color;
+
+import acm.graphics.*;
+import acm.program.*;
+public class bing extends GraphicsProgram {
+	private RandomGenerator rgen= RandomGenerator.getInstance();
+	public void run()
+	{
+		this.setSize(800,800);
+		int[] a = {1,5,8,9,3,45,56,5,8,7,8,45,8,6};
+		int sum = 0;
+		for(int i = 0;i<a.length;i++)
+		{
+			sum+=a[i];
+		}
+		float sta = 0;
+		float th = 0;
+		for(int i = 0;i<a.length;i++)
+		{
+			waitForClick();
+			th = 360 * (float)a[i]/sum;
+			GArc arc2=new GArc(500,500,sta,th);
+			sta = sta + th ;
+			arc2.setFilled(true);
+			arc2.setFillColor(new Color(rgen.nextInt(0,255),rgen.nextInt(0,255),rgen.nextInt(0,255)));
+			add(arc2,100,100);
+			GOval oval=new GOval(300,300,100,100);
+			oval.setFilled(true);
+			oval.setFillColor(new Color(255,255,255));
+			add(oval);
+		}
+		
+	}
+
+}

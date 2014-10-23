@@ -1,0 +1,11 @@
+import acm.program.*;
+public class magazine extends book{
+	private int Post;
+	public magazine(int Post,int Num,String str){super(Num,str);this.Post = Post;}
+	public int GetNum(){return GetNum();}
+	public String GetName(){return GetName();}
+	public int GetPost(){return Post;}
+	public boolean ChangeNum(int New){return ChangeNum(New);}
+	public boolean ChangeName(String New){return ChangeName( New);}
+	public boolean ChangePost(int New){this.Post=New;return true;}
+}
