@@ -1,0 +1,13 @@
+package class6;
+import acm.graphics.*;
+import acm.program.*;
+public class TestPoly extends GraphicsProgram{
+
+	public void run()
+	{
+		Poly P = new Poly(50,5);
+		//GPolygon p = P.N();
+		add(P.Get(),0,0);
+		
+	}
+}

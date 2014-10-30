@@ -1,0 +1,56 @@
+package class6;
+import acm.graphics.*;
+import acm.program.*;
+public class Poly extends GraphicsProgram{
+	double r;
+	GPolygon p=new GPolygon(); 
+	int edge;
+	int n;
+	public Poly (int edge,int n)
+	{
+		this.edge = edge;
+		this.n = n;
+		double c;
+		c = Math.sin(3.14);
+		double x,dx;
+		double y,dy;
+		double th;
+		double del;
+		int Cou;
+		del = (float)360/n;
+		c = Math.PI/360;
+		r = 2*((float)edge/(Math.sin(del*c)));
+		x = 2*r;
+		y = r;
+		th = 0;
+		Cou = 0;
+		p.addVertex(x, y);
+		double NOW = 0;
+		for (int i = 0;i < 2*n; i++)
+		{
+			
+			th += del;
+			if (Cou%2 == 0)
+			{
+				NOW = r*(Math.cos(del*c) - (Math.sin(del*c)*Math.tan(del*c)));
+				
+			}
+			else
+			{
+				NOW = r;
+			}
+			dx = NOW*Math.cos(th*c) + r;
+			dy = NOW*Math.sin(th*c) + r;
+			Cou++;
+			p.addEdge(dx-x, dy-y);
+			x = dx;
+			y = dy;
+
+		}
+	}
+	public GPolygon Get ()
+	{
+		return p;
+		
+	}
+}
