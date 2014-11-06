@@ -3,7 +3,7 @@
 #L[1] 课程名称 L[6]周次 L[7]时间 L[8]起止 L[9]位置
 
 import xlrd,xlwt,os
-import re
+import re,json
 
 Dict = {}
 
@@ -15,6 +15,7 @@ ZL= re.compile(r"主楼")
 XQ = re.compile(r"校区")
 TEDA = re.compile(r"泰达")
 QJ = re.compile(r"七教")
+FindNUM = re.compile("\d+")
 
 
 path = os.path.split(os.path.realpath(__file__))[0]
@@ -29,7 +30,11 @@ for i in range(nrows ):
 		pos = "2ZL"+(M[-4:])
 		
 	elif ZL.findall(M):
-		pos = "ZL"+(M[4:])
+		K = FindNUM.findall(M)
+		if  K:
+			pos = "ZL"+(K[0])
+		else:
+			pos = ""
 		
 	else:
 		pos = ""
@@ -66,10 +71,10 @@ wbk = xlwt.Workbook()
 print(len(Dict.keys()))
 for  i  in Dict.keys():
 
-	sheet = wbk.add_sheet(i.decode("utf-8","ignore"))
+	#sheet = wbk.add_sheet(i.decode("utf-8","ignore"))
 	
-	for T in range(1,8):
-		sheet.col(T).width = 6250
+	#for T in range(1,8):
+		#sheet.col(T).width = 6250
 	
 	Lis = []
 	
@@ -106,10 +111,23 @@ for  i  in Dict.keys():
 		
 			
 			
-	Dict[i] = Lis[:]	
-	for m in Dict[i]:
+	Dict[i] = Lis[:]
+	D = {}
+	#print Dict[i]
+	for k in range(1,8):
+		D[str(k)] = {}
+		for jh in range(1,13):
+			D[str(k)][str(jh)] = []
+	for jc in Dict[i]:
+		D[str(jc[1])][str(jc[2])].append(jc[0])
+	FIL = open(path+"\\bin\\"+str(i)+".json","w")
+	FIL.write(json.dumps(D))
+	FIL.close()
+	#raw_input()
+	
+	#for m in Dict[i]:
 		
-		sheet.write(  m[2] , m[1],m[0])
+		#sheet.write(  m[2] , m[1],m[0])
 
 		#ERRLIST.append(i)
 	
@@ -138,9 +156,9 @@ for  i  in Dict.keys():
 		raw_input("PAUSE")
 '''
 	
-wbk.save(path+"\\free\\res.xls")
-ERR = list(set(ERRLIST))
-print(len(ERR))
-f = open(path+"\\free\\ERR2.txt","w")
-for i in ERR:
-	f.writelines(i+'\n')
+#wbk.save(path+"\\free\\res.xls")
+#ERR = list(set(ERRLIST))
+#print(len(ERR))
+#f = open(path+"\\free\\ERR2.txt","w")
+#for i in ERR:
+	#f.writelines(i+'\n')
