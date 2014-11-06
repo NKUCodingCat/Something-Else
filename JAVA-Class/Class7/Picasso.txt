@@ -1,0 +1,39 @@
+package class7;
+
+import java.util.*;
+
+import acm.program.ConsoleProgram;
+
+public class strToken extends ConsoleProgram{
+	
+	public void run(){
+		String name = new String("Pablo Diego Jos¨¦ Francisco de Paula Juan Nepomuceno Mar¨ªa de los Remedios Cipriano de la Sant¨ªsima Trinidad Martyr Patricio Clito Ru¨ªz y Picasso");
+		StringTokenizer st=new StringTokenizer(name," ",false);
+		print(st.nextElement());
+		print(" ");
+		Object tmp;
+		while (true){
+			tmp = st.nextElement();
+			if(!st.hasMoreTokens())
+			{
+				print (tmp);
+				break;
+			}
+		}
+		
+		StringTokenizer st2=new StringTokenizer(name," ",false);
+		print ("\n");
+		print (tmp);
+		print(" ");
+		while (true){
+			tmp = st2.nextElement();
+			if(!st2.hasMoreTokens())
+			{	
+				break;
+			}
+			if((((String) tmp).charAt(0) >= 'A') && (((String) tmp).charAt(0) <= 'Z'))
+			{print (((String) tmp).charAt(0));}
+		}
+	}
+
+}
