@@ -35,7 +35,7 @@ for i in Dict.keys():
 			if  Dict[k][j] > 0:
 				num+=1
 		BN = (float(len(Dict.keys())))/num
-		wei = float(Dict[i][j])*math.log(BN)
+		wei = float(1+math.log(Dict[i][j]))*math.log(BN)
 		v.append(wei)
 	tf_idf_wei[i] = v[:]
 Tar = []
