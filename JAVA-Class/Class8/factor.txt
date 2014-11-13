@@ -1,0 +1,23 @@
+package class8;
+import acm.program.ConsoleProgram;
+public class factor extends ConsoleProgram{
+	public void run(){
+		int a = readInt("The Num: ");
+		if (a>=0)
+		{
+			if (a==0){print("\nres = 1");}
+			else{
+				double [] Arr = new double [a];
+				Arr[0]=1;
+				for(int i = 1;i<a;i++)
+				{
+					Arr[i] = (i+1)*Arr[i-1];
+				}
+				print("\nres=");
+				print(Arr[a-1]);
+			}
+		}
+		else{print("Input ERR");}
+	}
+
+}

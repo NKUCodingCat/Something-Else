@@ -1,0 +1,18 @@
+package class8;
+import acm.program.ConsoleProgram;
+import java.util.Arrays;
+public class Sort extends ConsoleProgram{
+	public void run(){
+		String str = "ACTGPHQIMZ";
+		char [] a = new char [str.length()];
+		for(int i = 0;i<str.length();i++)
+		{
+			a[i]=str.charAt(i);
+		}
+		Arrays.sort(a);
+		for(int i = str.length()-1;i>=0;i--)
+		{
+			print(a[i]);
+		}
+	}
+}
