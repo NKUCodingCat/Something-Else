@@ -1,0 +1,68 @@
+package Class9;
+
+import java.io.*;
+import java.util.ArrayList;
+
+import acm.program.ConsoleProgram;
+
+public class HW1 extends ConsoleProgram{
+	public void run(){
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class9/wfgc.txt").toString().substring(6).replace("/", File.separator),"utf-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return;
+		}
+		PrintWriter pw;
+		try {
+			pw=new PrintWriter(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class9").toString().substring(6).replace("/", File.separator),"utf-8")+"\\gc.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			print("FileNotFound");
+			return;
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			print("UnsupportedEncoding");
+			return;
+		}
+		ArrayList al=new ArrayList();
+		boolean Flag = true;
+		while(true){
+				Flag = true;
+				String line = null;
+				try {
+					line = rd.readLine();
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(line==null) break;
+				for(int i = 0;i<al.size();i++){
+					if(line.equals(al.get(i))){
+						Flag = false;
+						break;
+					}
+				}
+				if(!Flag)continue;
+				al.add(line);
+				pw.println(line);
+			}
+			try {
+				rd.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		pw.close();
+
+	}
+}

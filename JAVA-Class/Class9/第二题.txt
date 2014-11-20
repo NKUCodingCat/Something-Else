@@ -1,0 +1,61 @@
+package Class9;
+import java.io.*;
+import java.util.regex.*;
+import java.util.ArrayList;
+
+import acm.program.ConsoleProgram;
+public class HW2 extends ConsoleProgram{
+	
+	public void run(){
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class9/ºìÂ¥ÃÎ.txt").toString().substring(6).replace("/", File.separator),"utf-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return;
+		}
+		int Huanhang = 0;
+		int Space = 0;
+		int Daiyu = 0;
+		Pattern M = Pattern.compile("[^ ]");
+		Pattern N;
+		try {
+			N = Pattern.compile(new String("÷ìÓñ".getBytes("GB18030"), "GB2312"));
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			print("ERR");
+			N = Pattern.compile("÷ìÓñ");
+			e1.printStackTrace();
+		}
+		String S = "";
+		String T = "";
+		while (true){
+			try {
+				T = rd.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(T==null) break;
+			Huanhang += 1;
+			S += T;
+		}
+		Matcher M2 = M.matcher(S);
+		Matcher N2 = N.matcher(S);
+		while(M2.find()){Space+=1;}
+		while(N2.find()){Daiyu+=1;}
+		print("\n»»ÐÐÊý=");
+		print(Huanhang);
+		print("\n·Ç¿Õ¸ñÊý=");
+		print(Space);
+		print("\n÷ìÓñÊý=");
+		print(Daiyu);
+	}
+
+}

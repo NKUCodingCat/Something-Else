@@ -35,7 +35,10 @@ for i in Dict.keys():
 			if  Dict[k][j] > 0:
 				num+=1
 		BN = (float(len(Dict.keys())))/num
-		wei = float(1+math.log(Dict[i][j]))*math.log(BN)
+		if Dict[i][j]!=0:
+			wei = float(1+math.log(Dict[i][j]))*math.log(BN)
+		else:
+			wei = 0
 		v.append(wei)
 	tf_idf_wei[i] = v[:]
 Tar = []
@@ -45,6 +48,12 @@ for word in ToFind:
 	num = re.findall(word,Text)
 	Tar.append(len(num))
 
+res = []
 	
 for i in tf_idf_wei.keys():
-	print "the simmilarity between Tar.txt and "+i+" is "+str(Sim(tf_idf_wei[i],Tar))
+	res.append([i,Sim(tf_idf_wei[i],Tar)])
+
+res.sort(key = lambda k:k[1])
+
+for i in res:
+	print "The similarity between",i[0],"and Tar.txt is",i[1]

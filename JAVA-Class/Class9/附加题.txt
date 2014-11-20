@@ -1,0 +1,101 @@
+package Class9;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+import acm.program.ConsoleProgram;
+
+public class HW3 extends ConsoleProgram{
+	class Word{
+		 String W;
+		 int num;
+		 public String toString()
+		 {
+			 return W+"   "+num;
+		 }
+		}
+	
+	public void run(){
+		Comparator<Word> comparator = new Comparator<Word>(){
+
+
+			public int compare(Word A1, Word A2) {
+				if(A1.num!=A2.num){return A1.num-A2.num;}
+				else{
+					return A1.W.compareTo(A2.W);
+				}
+			}
+		
+			
+		};
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class9/wfgc.txt").toString().substring(6).replace("/", File.separator),"utf-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return;
+		}
+		PrintWriter pw;
+		try {
+			pw=new PrintWriter(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class9").toString().substring(6).replace("/", File.separator),"utf-8")+"\\gc.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			print("FileNotFound");
+			return;
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			print("UnsupportedEncoding");
+			return;
+		}
+		ArrayList al=new ArrayList();
+		boolean Flag = true;
+		while(true){
+				Word w=new Word();
+				Flag = true;
+				String line = null;
+				try {
+					line = rd.readLine();
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(line==null) break;
+				for(int i = 0;i<al.size();i++){
+					if(line.equals(((Word)al.get(i)).W)){
+						Flag = false;
+						((Word)al.get(i)).num++;
+						//(int)(((ArrayList) al.get(i)));
+						break;
+					}
+				}
+				if(!Flag)continue;
+				w.W = line;
+				w.num = 1;
+				al.add(w);
+				//println(line);
+			}
+			try {
+				rd.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		pw.close();
+		Collections.sort(al,comparator);
+		for(int i = al.size()-1;i>=0;i--)
+		{
+			println(al.get(i));
+		}
+
+	}
+}
