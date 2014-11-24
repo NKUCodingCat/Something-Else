@@ -1,9 +1,15 @@
 如何使用这个神【wu】奇【liao】的小工具呢~
 ==============
+最新版请戳[这里](https://github.com/NKUCodingCat/Something-Else/blob/master/%E8%8B%B1%E8%AF%AD%E8%87%AA%E4%B8%BB%E5%AD%A6%E4%B9%A0/%E5%88%B7%E9%A2%98-%E6%94%B9%E8%BF%9B%E7%89%88%E6%9C%AC.rar?raw=true)，内有说明。
+
+
+当然了……最新版不太稳定(事实上就是一堆Python脚本)，所以大家还是用下面这个
 
 
 首先下载[答案包](https://github.com/NKUCodingCat/Something-Else/blob/master/%E8%8B%B1%E8%AF%AD%E8%87%AA%E4%B8%BB%E5%AD%A6%E4%B9%A0/%E7%AD%94%E6%A1%88.rar?raw=true)
 和[一个神奇的文本编辑器](https://github.com/NKUCodingCat/Something-Else/blob/master/%E8%8B%B1%E8%AF%AD%E8%87%AA%E4%B8%BB%E5%AD%A6%E4%B9%A0/%E7%9C%8B%E7%AD%94%E6%A1%88%E6%9D%BF.rar?raw=true)【由于伟大的GFW所以氖萌最好多戳几次这两个链接不行就新标签页打开】
+
+
 
 然后打开文本编辑器（他应该叫看答案板.rar）然后运行，这时候你就会发现有个神奇的方框出现在你的桌面上……一直在最上层……对……这就是对付自主学习用的，把答案贴进去就可以了……其实直接用左上角的打开也无所谓╮(￣▽￣")╭ 随便咯
 
