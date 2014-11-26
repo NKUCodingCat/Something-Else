@@ -41,24 +41,27 @@ def Listen():
 		#print("%s,%.6d len:%d" % (timestr, header.contents.ts.tv_usec, header.contents.len))
 	
 	NAMES =  SR.GETMAC()
-	for i in range(0,len(NAMES)):
-		print i+1,NAMES[i][0]
-	global raw_input
 	
-	if (i>1 and re.match(r'^\d+$', n) and n>0 and n<i+2):
-		n = raw_input("Please Input the Adapter you are using(1-%d): "%(i+1))
-		name = NAMES[int(n)-1][1]
-	elif (i==0):
-		n = 0
-		name = NAMES[0][1]
-	elif(not NAMES):
+	if(not NAMES):
 		print "Adapter Not Found"
 		os.system("PAUSE")
 		sys.exit(-1)
+	for i in range(0,len(NAMES)):
+		print i+1,NAMES[i][0]
+	global raw_input
+	if (i>=1):
+		n = raw_input("Please Input the Adapter you are using(1-%d): "%(i+1))
+		if( re.match(r'^\d+$', n) and  int(n)>0 and  int(n)<i+2):
+			name = NAMES[int(n)-1][1]
+		else:
+			print "Input Error"
+			os.system("PAUSE")
+			sys.exit(-1)
 	else:
-		print "Input Error"
-		os.system("PAUSE")
-		sys.exit(-1)
+		n = 0
+		name = NAMES[0][1]
+	
+		
 	packet_handler=PHAND(_packet_handler)
 	alldevs=POINTER(pcap_if_t)()
 	errbuf= create_string_buffer(PCAP_ERRBUF_SIZE)
