@@ -44,7 +44,7 @@ def Listen():
 	for i in range(0,len(NAMES)):
 		print i+1,NAMES[i][0]
 	global raw_input
-	n = raw_input("Please Input the Adapter you are using(1-%d):"%(i+1))
+	n = raw_input("Please Input the Adapter you are using(1-%d): "%(i+1))
 	if (i>1 and re.match(r'^\d+$', n) and n>0 and n<i+2):
 		name = NAMES[int(n)-1][1]
 	elif (i==1):
