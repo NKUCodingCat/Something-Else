@@ -1,0 +1,55 @@
+package Class10;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+import acm.program.ConsoleProgram;
+
+public class HW1 extends ConsoleProgram{
+	public void run()
+	{
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class10/Î¢²©·¢Ìû.txt").toString().substring(6).replace("/", File.separator),"utf-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return;
+		}
+		String line = null;
+		try {
+			line = (rd.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HashMap person=new HashMap();
+		
+		while(true){
+			
+			if (line!=null)
+			{
+				StringTokenizer st=new StringTokenizer(line,"\t",false);
+				person.put(st.nextElement(),st.nextElement());
+			
+				try {
+					line = (rd.readLine());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+				break;
+			}
+		}
+		print(person.size());
+	}
+
+}

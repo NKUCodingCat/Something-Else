@@ -1,0 +1,207 @@
+package Class10;
+//三个文本文件已经转换为GB2312编码，因为Java的编码系统实在是搞不懂╮(￣▽￣")╭ ，Python大法好
+import java.io.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import acm.program.ConsoleProgram;
+
+public class HW2 extends ConsoleProgram{
+	public HashMap<String, String> pos()
+	{
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class10/positive.txt").toString().substring(6).replace("/", File.separator),"UTF-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return new HashMap<String, String>();
+		}
+		String line = null;
+		try {
+			line = (rd.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HashMap<String, String> person=new HashMap<String, String>();
+		
+		while(true){
+			
+			if (line!=null)
+			{
+
+				StringTokenizer st;
+
+					st = new StringTokenizer(line,"\t",false);
+				
+				String s1 = "";
+				String s2 = "";
+				if(st.hasMoreElements())s1 = (String) st.nextElement();
+				if(st.hasMoreElements())s2 = (String) st.nextElement();
+				person.put(s1,s2);
+				
+			
+				try {
+					line = (rd.readLine());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+				break;
+			}
+		}
+		return person;
+	}
+	public HashMap<String, String> neg()
+	{
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class10/negative.txt").toString().substring(6).replace("/", File.separator),"UTF-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return new HashMap<String, String>();
+		}
+		String line = null;
+		try {
+			line = (rd.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HashMap<String, String> person=new HashMap<String, String>();
+		
+		while(true){
+			
+			if (line!=null)
+			{
+
+				StringTokenizer st;
+
+					st = new StringTokenizer(line,"\t",false);
+				
+				String s1 = "";
+				String s2 = "";
+				if(st.hasMoreElements())s1 = (String) st.nextElement();
+				if(st.hasMoreElements())s2 = (String) st.nextElement();
+				person.put(s1,s2);
+				
+			
+				try {
+					line = (rd.readLine());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+				break;
+			}
+		}
+		return person;
+	}
+	public void run()
+	{
+		File directory = new File("");
+		BufferedReader rd = null;
+		try {
+			try {
+				rd=new BufferedReader(new FileReader(java.net.URLDecoder.decode(HW1.class.getClassLoader().getResource("Class10/微博文本2014-11-27.txt").toString().substring(6).replace("/", File.separator),"utf-8")));
+			} catch (UnsupportedEncodingException e1) {
+				print("Filename Solve Fail");
+			}
+
+		} catch (FileNotFoundException e1) {
+			print("File 404");
+			return;
+		}
+		String line = null;
+		try {
+			line = (rd.readLine());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String s = "";
+		while(true){
+			s += line;
+			s += "\n";
+			if (line==null)
+			{
+				break;
+			}
+			try {
+				line = rd.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		HashMap<String, String> PMap = pos();
+		HashMap<String, String> NMap = neg();
+		float POS=0;
+		float NEG=0;
+		Iterator<?> itP = PMap.keySet().iterator();
+		Iterator<?> itN = NMap.keySet().iterator();
+		
+		int P = 0;
+		int N = 0;
+		Pattern Check = Pattern.compile("[\\\\\\^\\$\\*\\+\\?]");
+		
+		while(itP.hasNext()){
+			String Key = (String) itP.next();
+			Check.matcher(s).replaceAll("");
+			Pattern PN = Pattern.compile(Key);
+			Matcher PN2 = PN.matcher(s);
+			int Count = 0;
+			while(PN2.find()){Count+=1;}
+			float Val = 0;
+			try{
+				Val = Float.parseFloat((String)PMap.get(Key));
+			}
+			catch(Exception e){}
+			if(Count>0){P++;}
+			POS += (float)Count * Val;
+		}
+		
+		while(itN.hasNext()){
+			String Key = (String) itN.next();
+			Check.matcher(s).replaceAll("");
+			Pattern PN = Pattern.compile(Key);
+			Matcher PN2 = PN.matcher(s);
+			int Count = 0;
+			while(PN2.find()){Count+=1;}
+			float Val = 0;
+			try{
+				Val = Float.parseFloat((String)NMap.get(Key));
+			}
+			catch(Exception e){}
+			if(Count>0){N++;}
+			NEG += (float)Count * Val;
+		}
+		println(P);
+		println(N);
+		print("正向情绪");
+		println(POS);
+		print("负向情绪");
+		println(NEG);
+	}
+
+}

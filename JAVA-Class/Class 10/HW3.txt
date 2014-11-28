@@ -1,0 +1,54 @@
+package Class10;
+//单选框什么的不想做了╮(￣▽￣")╭ 想做个Flappy Bird……【按照我的拖延症大概会是有生之年吧_(:з」∠)_】
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import acm.graphics.*;
+import acm.program.*;
+
+public class HW3 extends GraphicsProgram{
+	public int size = 20;
+	public GObject gobj;
+	public void init(){
+		//setFont("宋体-50");
+		JButton bt=new JButton("画圆");
+		add(bt,NORTH);
+		JButton bt2=new JButton("画方");
+		add(bt2,NORTH);
+		String[] VE = {"Small","Medium","Large"};
+		JComboBox pick=new JComboBox(VE);
+		pick.setEditable(false);
+		pick.setSelectedItem("Small");
+		add(pick,NORTH);
+		addActionListeners();
+		pick.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getItem().equals("Small")){size = 20;}
+				if(e.getItem().equals("Medium")){size =50;}
+				if(e.getItem().equals("Large")){size = 100;}
+			}		
+		});
+		addMouseListeners();
+		}
+	public void mouseDragged(MouseEvent e){
+		if(gobj == null){return;}
+		else{gobj.setLocation(e.getX(), e.getY());return;}
+	}
+	public void mousePressed(MouseEvent e){
+		gobj = getElementAt(e.getX(), e.getY());	
+		if(e.getButton()==3){remove(gobj);}
+	}
+	public void actionPerformed(ActionEvent e){
+		String cmd=e.getActionCommand();
+		
+		if(cmd.equals("画圆")){
+			GOval Cir = new GOval(0,0,size,size);
+			add(Cir);
+		}
+		if(cmd.equals("画方")){
+			GRect Squ = new GRect(0,0,size,size);
+			add(Squ);
+		} 
+	}
+}
