@@ -1,0 +1,142 @@
+package Class10;
+import java.awt.event.*;
+import java.util.*;
+
+import javax.swing.*;
+
+import acm.graphics.*;
+import acm.program.*;
+
+public class FlappyBird extends GraphicsProgram{
+	//public GObject gobj;
+	public GRect Bird = new GRect(50,190,20,20);
+	public boolean UP = false; 
+	public boolean St = false;
+	public int delta = 100;
+	public ArrayList<int[]> al=new ArrayList(); //(x,h)
+	public ArrayList<GRect[]> POST = new ArrayList();//(Upper£¬Lower)
+	public Random random = new Random();
+	public JButton bt=new JButton("Reset");
+	public boolean isFail = false;
+	public void init(){
+		St = false;
+		UP = false;
+		isFail = false;
+		removeAll();
+		while(al.size()>0){al.remove(0);}
+		while(POST.size()>0){POST.remove(0);}
+		add(Bird);
+		setSize(800,500);
+		Bird.setLocation(50, 190);
+		add(bt,NORTH);
+		addActionListeners();
+		addMouseListeners();
+		addKeyListeners();
+		UP = false; 
+		St = false; 
+		for(int i = 3;i>0;i--)
+			{
+				int [] tmp = {(800 - i*150),50+Math.abs(random.nextInt())%100};
+				al.add(tmp);
+			}
+		for(int i = 0;i<3;i++)
+			{
+				GRect Tmp = new GRect(al.get(i)[0],0,40,al.get(i)[1]);
+				add(Tmp);
+				GRect Tmp2 = new GRect(al.get(i)[0],al.get(i)[1]+delta,40,(400-al.get(i)[1]-delta));
+				add(Tmp2);
+				GRect[] T = {Tmp,Tmp2};
+				POST.add(T);
+			}
+		}
+	public boolean isHit()
+	{
+		if(al.get(0)[0]<70 && al.get(0)[0] >10)
+		{
+			if(Bird.getY()<al.get(0)[1] || Bird.getY()+20>al.get(0)[1]+100)
+			{
+				isFail = true;
+				return true;
+			}
+		}
+		return false;
+	}
+	public void post(){
+		for(int i = 0;i<al.size();i++)
+		{
+			if(al.get(i)[0] < -40){
+				al.remove(i);
+				GRect[] Tmp= POST.remove(i);
+				remove(Tmp[0]);
+				remove(Tmp[1]);
+			}
+			else{
+				al.get(i)[0] -= 2;
+			}
+		}
+		if (al.get(al.size()-1)[0] < 650)
+		{
+			int [] T2 = {800,50+Math.abs(random.nextInt())%100};
+			al.add(T2);
+			GRect Tmp = new GRect(T2[0],0,40,T2[1]);
+			add(Tmp);
+			GRect Tmp2 = new GRect(T2[0],T2[1]+delta,40,(400-T2[1]-delta));
+			add(Tmp2);
+			GRect[] T = {Tmp,Tmp2};
+			POST.add(T);
+		}
+		for (int i = 0;i<POST.size();i++)
+		{
+			POST.get(i)[0].setLocation(al.get(i)[0], POST.get(i)[0].getY());
+			POST.get(i)[1].setLocation(al.get(i)[0], POST.get(i)[1].getY());
+		}
+	}
+	public void refresh(){
+		Date d = new Date();
+		long t1 = d.getTime();
+		while(true){
+			t1 = d.getTime();
+			if(Bird.getY()+20>=400 || !St || isHit())break;
+			if(UP){Bird.setLocation(Bird.getX(), Bird.getY()-50);UP = false;}
+			else{Bird.setLocation(Bird.getX(), Bird.getY()+2);}
+			post();
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block					
+				e.printStackTrace();
+			}			
+		}
+		St = false;
+	}
+	public void mouseReleased(MouseEvent e){
+		St = true;
+	}
+	public void actionPerformed(ActionEvent e){
+		String cmd=e.getActionCommand();
+		if(cmd.equals("Reset")){
+			init();
+			St = false;
+		}
+	}
+	public void keyPressed(KeyEvent e){
+		char keyChar=e.getKeyChar();
+		if(keyChar == KeyEvent.VK_SPACE){UP = true;}
+	}
+	public void run(){
+		while (true){
+			if(!St && !isFail){
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else{
+				refresh();
+			}
+		}
+	}
+}
+
