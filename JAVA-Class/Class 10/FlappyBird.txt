@@ -18,11 +18,17 @@ public class FlappyBird extends GraphicsProgram{
 	public Random random = new Random();
 	public JButton bt=new JButton("Reset");
 	public boolean isFail = false;
+	public int Pass;
+	public boolean Prev = false;
+	public GLabel Label = new GLabel("0",400,50);
 	public void init(){
+		Label.setLabel("0");
+		Pass = 0;
 		St = false;
 		UP = false;
 		isFail = false;
 		removeAll();
+		add(Label);
 		while(al.size()>0){al.remove(0);}
 		while(POST.size()>0){POST.remove(0);}
 		add(Bird);
@@ -53,13 +59,20 @@ public class FlappyBird extends GraphicsProgram{
 	{
 		if(al.get(0)[0]<70 && al.get(0)[0] >10)
 		{
+			Prev = true;
 			if(Bird.getY()<al.get(0)[1] || Bird.getY()+20>al.get(0)[1]+100)
 			{
 				isFail = true;
 				return true;
 			}
+			return false;
 		}
-		return false;
+		else{
+			if(Prev)Pass++;
+			Prev = false;
+			Label.setLabel(Integer.toString(Pass));
+			return false;
+		}
 	}
 	public void post(){
 		for(int i = 0;i<al.size();i++)
@@ -96,7 +109,7 @@ public class FlappyBird extends GraphicsProgram{
 		long t1 = d.getTime();
 		while(true){
 			t1 = d.getTime();
-			if(Bird.getY()+20>=400 || !St || isHit())break;
+			if(Bird.getY()+20>=400 || Bird.getY()<0 || !St || isHit())break;
 			if(UP){Bird.setLocation(Bird.getX(), Bird.getY()-50);UP = false;}
 			else{Bird.setLocation(Bird.getX(), Bird.getY()+2);}
 			post();
@@ -108,6 +121,7 @@ public class FlappyBird extends GraphicsProgram{
 			}			
 		}
 		St = false;
+		Label.sendToFront();
 	}
 	public void mouseReleased(MouseEvent e){
 		St = true;
