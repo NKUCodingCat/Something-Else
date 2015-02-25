@@ -19,7 +19,7 @@ FindNUM = re.compile("\d+")
 
 
 path = os.path.split(os.path.realpath(__file__))[0]
-data = xlrd.open_workbook(path+'\\class.xlsx')
+data = xlrd.open_workbook(path+'\\class.xls')
 table = data.sheets()[0]
 nrows = table.nrows
 for i in range(nrows ):
@@ -38,14 +38,6 @@ for i in range(nrows ):
 		
 	else:
 		pos = ""
-	'''	
-	elif XQ.findall(M):
-		pos = "XQ"+(M[-3:])
-		
-	elif TEDA.findall(M):
-		pos = "TEDA"+(M[-4:])
-	'''	
-	
 
 	#pos = L[9]
 	val = [L[1],L[6],L[7],L[8]]
@@ -123,42 +115,3 @@ for  i  in Dict.keys():
 	FIL = open(path+"\\bin\\"+str(i)+".json","w")
 	FIL.write(json.dumps(D))
 	FIL.close()
-	#raw_input()
-	
-	#for m in Dict[i]:
-		
-		#sheet.write(  m[2] , m[1],m[0])
-
-		#ERRLIST.append(i)
-	
-	
-	
-	#print Lis
-	#raw_input("PAUSE")
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-'''
-		for m in L:
-			try:
-				sheet.write(  m,j[1] , j[0] )
-			except:
-				ERRLIST.append(i)
-		print j
-		raw_input("PAUSE")
-'''
-	
-#wbk.save(path+"\\free\\res.xls")
-#ERR = list(set(ERRLIST))
-#print(len(ERR))
-#f = open(path+"\\free\\ERR2.txt","w")
-#for i in ERR:
-	#f.writelines(i+'\n')

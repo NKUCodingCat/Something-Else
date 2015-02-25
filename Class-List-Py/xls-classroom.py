@@ -16,30 +16,13 @@ QJ = re.compile(r"七教")
 
 
 path = os.path.split(os.path.realpath(__file__))[0]
-data = xlrd.open_workbook(path+'\\class.xlsx')
+data = xlrd.open_workbook(path+'\\class.xls')
 table = data.sheets()[0]
 nrows = table.nrows
 for i in range(nrows ):
 	L = table.row_values(i)
 	M = L[9].encode("utf-8")
-	'''
-	if ZL2.findall(M):
-		pos = "2ZL"+(M[-4:])
-		
-	elif ZL.findall(M):
-		pos = "ZL"+(M[-3:])
-		
-	elif XQ.findall(M):
-		pos = "XQ"+(M[-3:])
-		
-	elif TEDA.findall(M):
-		pos = "TEDA"+(M[-4:])
-		
-	else:
-		pos = ""
-		print L[9]
-		pass
-	'''
+
 	pos = L[9]
 	val = (L[1],L[6],L[7])
 	
