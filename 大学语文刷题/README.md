@@ -5,7 +5,7 @@
 用法：
 
 1. 直接下载/src中的源代码，用Python运行，所需库为lxml，requests，Py2.x语法，3.x请自己改去
-2. 等我哪天心情好打包个exe版本
+2. windows用户下载/windows/windows.rar 打开用
 
 如有问题请咨询身边的程序猿【不是喵】
 
